@@ -1,99 +1,176 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasturchi bot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Fira Code', monospace;
-            background-color: #121212;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        header {
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #1e1e1e;
-        }
-
-        .main {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-        }
-
-        textarea {
-            width: 100%;
-            height: 300px;
-            background-color: #1e1e1e;
-            color: #0f0;
-            font-size: 16px;
-            padding: 10px;
-            border: none;
-            resize: none;
-            outline: none;
-            border-radius: 8px;
-        }
-
-        .code-box {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #2c2c2c;
-            border-left: 5px solid #0f0;
-            white-space: pre-wrap;
-            border-radius: 5px;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background-color: #1a1a1a;
-            border-top: 1px solid #333;
-        }
-
-        .tab {
-            color: #aaa;
-            text-align: center;
-            flex-grow: 1;
-            font-size: 14px;
-        }
-
-        .tab.active {
-            color: #0f0;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dasturchi Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background-color: #121212;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #1f1f1f;
+      text-align: center;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .page {
+      display: none;
+      padding: 15px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .page.active {
+      display: block;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 10px;
+      border-left: 5px solid #0f0;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      color: #0f0;
+    }
+    textarea {
+      width: 100%;
+      height: 160px;
+      background: #1e1e1e;
+      color: #0f0;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 15px;
+      resize: none;
+    }
+    .button {
+      background-color: #0f0;
+      color: black;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      font-weight: bold;
+      display: none;
+    }
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      background: #1a1a1a;
+      padding: 10px;
+      border-top: 1px solid #333;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+    .tab.active {
+      color: #0f0;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 <body>
+  <header>👨‍💻 Dasturchi Bot</header>
 
-    <header>
-        👨‍💻 Dasturchi Bot
-    </header>
+  <!-- Bosh sahifa -->
+  <div id="home" class="page active">
+    <h3>🏠 Bosh sahifa</h3>
+    <p>Xush kelibsiz! Dasturlashni tez yozib o‘rganing.</p>
+  </div>
 
-    <div class="main">
-        <div class="code-box" id="snippet">
-# Foydalanish uchun tayyor kod
+  <!-- Mashq sahifa -->
+  <div id="practice" class="page">
+    <h3>💻 Kod yozish mashqi</h3>
+    <pre id="original">
+# Misol: Python
 print("Salom, dunyo!")
-        </div>
+    </pre>
+    <textarea id="userInput" placeholder="Kodni aynan yozing..."></textarea>
+    <div id="feedback"></div>
+    <button id="submitBtn" class="button">📤 Yuborish</button>
+  </div>
 
-        <textarea placeholder="Bu kodni qayta yozing..."></textarea>
-    </div>
+  <!-- Statistika sahifa -->
+  <div id="stats" class="page">
+    <h3>📊 Statistika</h3>
+    <p>Yozilgan kodlar soni: 0</p>
+    <p>To‘g‘rilik darajasi: 0%</p>
+  </div>
 
-    <footer>
-        <div class="tab active">🏠 Uy</div>
-        <div class="tab">💻 Mashq</div>
-        <div class="tab">📊 Statistika</div>
-        <div class="tab">👤 Profil</div>
-    </footer>
+  <!-- Profil sahifa -->
+  <div id="profile" class="page">
+    <h3>👤 Profil</h3>
+    <p>Ism: Solejon</p>
+    <p>Telegram ID: 6887251996</p>
+    <p>Til: Python</p>
+  </div>
 
+  <!-- Navigatsiya -->
+  <div class="bottom-nav">
+    <div class="tab active" onclick="showPage('home', this)">🏠</div>
+    <div class="tab" onclick="showPage('practice', this)">💻</div>
+    <div class="tab" onclick="showPage('stats', this)">📊</div>
+    <div class="tab" onclick="showPage('profile', this)">👤</div>
+  </div>
+
+  <script>
+    const original = `# Misol: Python\nprint("Salom, dunyo!")`;
+    const userInput = document.getElementById("userInput");
+    const feedback = document.getElementById("feedback");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function showPage(id, el) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    userInput.addEventListener("input", () => {
+      const input = userInput.value;
+      let result = "";
+      let correct = true;
+
+      for (let i = 0; i < original.length; i++) {
+        if (!input[i]) {
+          result += original[i];
+        } else if (input[i] === original[i]) {
+          result += original[i];
+        } else {
+          result += `<span class="error">${original[i]}</span>`;
+          correct = false;
+        }
+      }
+
+      feedback.innerHTML = `<pre>${result}</pre>`;
+
+      if (input === original) {
+        submitBtn.style.display = "block";
+      } else {
+        submitBtn.style.display = "none";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("✅ To‘g‘ri yozildi!");  // keyinchalik API ga yuborish uchun
+      userInput.disabled = true;
+      submitBtn.disabled = true;
+    });
+  </script>
 </body>
 </html>
