@@ -10,7 +10,7 @@ import os
 
 # === Sozlamalar ===
 API_TOKEN = '7733746139:AAF9OpkPEXDqObRIC23YbNOJrNmEW6On590'  # ← Bot tokeningizni bu yerga yozing
-ADMIN_ID = 6887251996         # ← Faqat siz snippet qo‘sha olasiz
+ADMIN_ID = 6887251996 # ← Faqat siz snippet qo‘sha olasiz
 
 bot = telebot.TeleBot(API_TOKEN)
 
