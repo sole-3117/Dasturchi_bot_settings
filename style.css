@@ -1,0 +1,28 @@
+body {
+  font-family: 'Fira Code', monospace;
+  background: #121212;
+  color: #fff;
+}
+
+textarea {
+  background: #1e1e1e;
+  color: #0f0;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  resize: none;
+}
+
+pre {
+  background: #1f1f1f;
+  padding: 10px;
+  border-left: 5px solid #0f0;
+  white-space: pre-wrap;
+  color: #0f0;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
