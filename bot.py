@@ -30,7 +30,7 @@ def save_snippets(snippets):
 # === Start komandasi ===
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-    web_app_url = "https://yourdomain.com/app"  # ← Web App sahifangizni bu yerga qo‘ying
+    web_app_url = "https://dasturchi-bot-settings-git-main-solejon-s-projects.vercel.app"  # ← Web App sahifangizni bu yerga qo‘ying
     markup = InlineKeyboardMarkup()
     markup.add(
         InlineKeyboardButton("👨‍💻 Mashqni boshlash", web_app=WebAppInfo(url=web_app_url))
